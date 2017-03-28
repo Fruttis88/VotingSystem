@@ -8,10 +8,10 @@ import ru.grad.repository.CrudRestaurantRepository;
 import ru.grad.repository.CrudUserRepository;
 import ru.grad.repository.CrudVoteRepository;
 import ru.grad.util.exception.CantVoteException;
-
 import java.time.LocalDate;
-import java.util.Calendar;
+import java.time.LocalTime;
 import java.util.List;
+
 
 @Service
 public class VoteServiceImpl implements VoteService {
@@ -32,9 +32,10 @@ public class VoteServiceImpl implements VoteService {
     @Override
     public Vote save(int restaurantId, int userId) {
         LocalDate today = LocalDate.now();
+        LocalTime endingVoteTime = LocalTime.of(11,0);
         Vote voteToday = repository.getUserVotesToday(userId, today);
         if (voteToday != null) {
-            if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) > 11) {
+            if(LocalTime.now().isAfter(endingVoteTime)) {
                 throw new CantVoteException("too late to vote");
             }
         } else {
@@ -48,6 +49,8 @@ public class VoteServiceImpl implements VoteService {
         return voteToday;
     }
 
+//    using only for testing
+    @Override
     public List<Vote> getAll() {
         return repository.getAll();
     }

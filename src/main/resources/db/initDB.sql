@@ -51,7 +51,7 @@ CREATE TABLE votes (
   id            INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   restaurant_id INTEGER NOT NULL,
   user_id       INTEGER NOT NULL,
-  votedate      TIMESTAMP           DEFAULT now(),
+  votedate      DATE           DEFAULT now(),
   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
