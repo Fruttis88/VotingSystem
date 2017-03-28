@@ -16,12 +16,12 @@ import ru.grad.service.VoteService;
 public class VoteController {
     private static final Logger LOG = LoggerFactory.getLogger(VoteController.class);
 
-    static final String URL = "/api/v1/votes";
+    static final String URL = "/api/v1/restaurants";
 
     @Autowired
     private VoteService service;
 
-    @PostMapping(value = "/{restaurantId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/{restaurantId}/votes", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void create(@PathVariable("restaurantId") int restaurantId){
         int userId = AuthorizedUser.id();
         LOG.info("New vote by restaurant with id {} for User {}", restaurantId, userId);

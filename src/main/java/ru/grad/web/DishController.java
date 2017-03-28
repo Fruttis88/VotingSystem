@@ -23,7 +23,7 @@ import static ru.grad.util.ValidationUtil.checkNew;
 public class DishController {
     private static final Logger LOG = LoggerFactory.getLogger(DishController.class);
 
-    static final String URL = "/api/v1/dishes";
+    static final String URL = "/api/v1/restaurants";
 
     private final DishService service;
 
@@ -33,51 +33,50 @@ public class DishController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping(value = "/{id}/{restaurantId}")
-    public Dish get(@PathVariable("id") int id, @PathVariable("restaurantId") int restaurantId) {
+    @GetMapping(value = "/{restaurantId}/dishes/{id}")
+    public Dish get(@PathVariable("restaurantId") int restaurantId, @PathVariable("id") int id) {
         LOG.info("get dish {} for Restaurant {}", id, restaurantId);
         return service.get(id, restaurantId);
     }
-    @GetMapping(value = "/{restaurantId}")
+    @GetMapping(value = "/{restaurantId}/dishes")
     public List<Dish> getMenu(@PathVariable("restaurantId") int restaurantId) {
         LOG.info("getMenu for Restaurant {}", restaurantId);
         return service.getAll(restaurantId);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping(value = "/{id}/{restaurantId}")
-    public void delete(@PathVariable("id") int id, @PathVariable("restaurantId") int restaurantId) {
+    @DeleteMapping(value = "/{restaurantId}/dishes/{id}")
+    public void delete(@PathVariable("restaurantId") int restaurantId, @PathVariable("id") int id) {
         LOG.info("delete dish {} for Restaurant {}", id, restaurantId);
         service.delete(id, restaurantId);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping(value = "/{restaurantId}")
+    @DeleteMapping(value = "/{restaurantId}/dishes")
     public void deleteMenu(@PathVariable("restaurantId") int restaurantId) {
         LOG.info("deleteMenu, restaurantId= " + restaurantId);
         service.deleteRestaurantMenu(restaurantId);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PutMapping(value = "/{id}/{restaurantId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@Valid @RequestBody Dish dish, @PathVariable("id") int id, @PathVariable("restaurantId") int restaurantId) {
+    @PutMapping(value = "/{restaurantId}/dishes/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void update(@Valid @RequestBody Dish dish, @PathVariable("restaurantId") int restaurantId, @PathVariable("id") int id) {
         checkIdConsistent(dish, id);
         LOG.info("update {} for Restaurant {}", dish, restaurantId);
         service.update(dish, restaurantId);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping(value = "/{restaurantId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/{restaurantId}/dishes", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Dish> createWithLocation(@Valid @RequestBody Dish dish, @PathVariable("restaurantId") int restaurantId) {
         checkNew(dish);
         LOG.info("create {} for Restaurant {}", dish, restaurantId);
         Dish created = service.save(dish, restaurantId);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(URL + "/{id}")
+                .path(URL + "/{restaurantId}/dishes/" + dish.getId())
                 .buildAndExpand(created.getId()).toUri();
 
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
-
 }

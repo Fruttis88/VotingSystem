@@ -26,7 +26,7 @@ public class VoteControllerTest extends AbstractControllerTest {
     @Test
     public void testAdd() throws Exception {
         Vote vote = new Vote(null);
-        mockMvc.perform(post(URL + RES1_ID)
+        mockMvc.perform(post(URL + RES1_ID + "/votes")
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(USER))
                 .content(JsonUtil.writeValue(vote)))

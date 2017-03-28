@@ -32,7 +32,7 @@ public class DishControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGet() throws Exception {
-        mockMvc.perform(get(URL +  DISH_RES1_ID + "/" + RES1_ID)
+        mockMvc.perform(get(URL +  RES1_ID + "/dishes/" + DISH_RES1_ID)
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -42,7 +42,7 @@ public class DishControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetMenu() throws Exception{
-        mockMvc.perform(get(URL + RES1_ID)
+        mockMvc.perform(get(URL + RES1_ID + "/dishes")
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -52,7 +52,7 @@ public class DishControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetNotFound() throws Exception {
-        mockMvc.perform(get(URL + "10000/" + RES1_ID)
+        mockMvc.perform(get(URL + RES1_ID + "/dishes/10000")
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isUnprocessableEntity())
                 .andDo(print());
@@ -60,7 +60,7 @@ public class DishControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetUnauth() throws Exception {
-        mockMvc.perform(get(URL + DISH_RES1_ID + "/" + RES1_ID))
+        mockMvc.perform(get(URL + RES1_ID + "/dishes/" + DISH_RES1_ID))
                 .andExpect(status().isUnauthorized());
     }
 
@@ -68,7 +68,7 @@ public class DishControllerTest extends AbstractControllerTest {
     @Test
     public void testCreate() throws Exception {
         Dish expected = new Dish(null, "newDish", 800);
-        ResultActions action = mockMvc.perform(post(URL + RES1_ID)
+        ResultActions action = mockMvc.perform(post(URL + RES1_ID + "/dishes")
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
                 .content(JsonUtil.writeValue(expected))).andExpect(status().isCreated());
@@ -83,7 +83,7 @@ public class DishControllerTest extends AbstractControllerTest {
     @Test
     public void testCreateInvalid() throws Exception {
         Dish dish = new Dish(null, " ", 750);
-        mockMvc.perform(post(URL + RES1_ID)
+        mockMvc.perform(post(URL + RES1_ID + "/dishes")
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
                 .content(JsonUtil.writeValue(dish)))
@@ -97,7 +97,7 @@ public class DishControllerTest extends AbstractControllerTest {
         Dish updated = new Dish(DISH1);
         updated.setName("update");
         updated.setPrice(1488);
-        mockMvc.perform(put(URL + DISH_RES1_ID + "/" + RES1_ID)
+        mockMvc.perform(put(URL + RES1_ID + "/dishes/" + DISH_RES1_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
                 .content(JsonUtil.writeValue(updated)))
@@ -111,7 +111,7 @@ public class DishControllerTest extends AbstractControllerTest {
         Dish updated = new Dish(DISH1);
         updated.setName(" ");
         updated.setPrice(-900);
-        mockMvc.perform(put(URL + DISH_RES1_ID + "/" + RES1_ID)
+        mockMvc.perform(put(URL + RES1_ID + "/dishes/" + DISH_RES1_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
                 .content(JsonUtil.writeValue(updated)))
@@ -122,7 +122,7 @@ public class DishControllerTest extends AbstractControllerTest {
     @Transactional
     @Test
     public void testDelete() throws Exception {
-        mockMvc.perform(delete(URL + DISH_RES1_ID + "/" + RES1_ID)
+        mockMvc.perform(delete(URL + RES1_ID + "/dishes/" + DISH_RES1_ID)
                 .with(userHttpBasic(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -132,7 +132,7 @@ public class DishControllerTest extends AbstractControllerTest {
     @Transactional
     @Test
     public void testDeleteMenu() throws Exception {
-        mockMvc.perform(delete(URL + RES1_ID)
+        mockMvc.perform(delete(URL + RES1_ID + "/dishes")
                 .with(userHttpBasic(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -141,7 +141,7 @@ public class DishControllerTest extends AbstractControllerTest {
 
     @Test
     public void testDeleteNotFound() throws Exception {
-        mockMvc.perform(delete(URL + DISH_RES2_ID + "/" + RES1_ID)
+        mockMvc.perform(delete(URL + RES1_ID + "/dishes/" + DISH_RES2_ID)
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isUnprocessableEntity())
                 .andDo(print());
@@ -149,7 +149,7 @@ public class DishControllerTest extends AbstractControllerTest {
 
     @Test
     public void testDeleteMenuNotFound() throws Exception {
-        mockMvc.perform(delete(URL + "700")
+        mockMvc.perform(delete(URL + "700/dishes")
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isUnprocessableEntity())
                 .andDo(print());
