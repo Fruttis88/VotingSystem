@@ -1,5 +1,6 @@
 package ru.grad.service;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.grad.DishTestData;
@@ -16,6 +17,10 @@ public class RestaurantServiceTest extends AbstractServiceTest{
     @Autowired
     protected RestaurantService service;
 
+    @Before
+    public void setUp() throws Exception {
+        service.evictCache();
+    }
 
     @Test
     public void testSave() throws Exception{

@@ -1,6 +1,5 @@
 package ru.grad.web.user;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -9,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.grad.TestUtil;
 import ru.grad.model.Role;
 import ru.grad.model.User;
-import ru.grad.repository.JpaUtil;
 import ru.grad.service.UserService;
 import ru.grad.web.AbstractControllerTest;
 import ru.grad.web.json.JsonUtil;
@@ -28,11 +26,6 @@ import static ru.grad.UserTestData.*;
 public class AdminControllerTest extends AbstractControllerTest {
     @Autowired
     protected UserService userService;
-
-    @Before
-    public void setUp() throws Exception {
-        userService.evictCache();
-    }
 
     private static final String URL = AdminController.URL + "/";
 

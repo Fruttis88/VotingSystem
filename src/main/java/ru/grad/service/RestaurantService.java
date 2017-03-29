@@ -17,5 +17,5 @@ public interface RestaurantService {
 
     void update(Restaurant restaurant);
 
-
+    void evictCache();
 }

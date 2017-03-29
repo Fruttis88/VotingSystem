@@ -30,7 +30,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         this.repository = repository;
     }
 
-    @CacheEvict(value = "users", allEntries = true)
     @Override
     @Transactional
     public User save(User user) {
@@ -43,27 +42,23 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return checkNotFoundWithId(repository.findOne(id), id);
     }
 
-    @CacheEvict(value = "users", allEntries = true)
     @Override
     public List<User> getAll() {
         return repository.findAll();
     }
 
-    @CacheEvict(value = "users", allEntries = true)
     @Override
     public void delete(int id) {
 
         checkNotFoundWithId(repository.delete(id), id);
     }
 
-    @CacheEvict(value = "users", allEntries = true)
     @Override
     public void update(User user) {
         Assert.notNull(user, "user must not be null");
         repository.save(prepareToSave(user));
     }
 
-    @CacheEvict(value = "users", allEntries = true)
     @Override
     public void update(UserTo userTo) {
         User user = updateFromTo(get(userTo.getId()), userTo);
@@ -85,7 +80,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return new AuthorizedUser(user);
     }
 
-    @CacheEvict(value = "users", allEntries = true)
     @Override
     @Transactional
     public void enable(int id, boolean enabled) {
@@ -94,9 +88,5 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         repository.save(user);
     }
 
-    @CacheEvict(value = "users", allEntries = true)
-    @Override
-    public void evictCache() {
-    }
 
 }

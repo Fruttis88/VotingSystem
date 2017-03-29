@@ -1,6 +1,7 @@
 package ru.grad.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -28,6 +29,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         return checkNotFoundWithId(repository.findOne(id), id);
     }
 
+    @CacheEvict(value = "restaurants", allEntries = true)
     @Override
     public List<Restaurant> getAll() {
         return repository.getAllWithDishes();
@@ -42,6 +44,11 @@ public class RestaurantServiceImpl implements RestaurantService {
     public void update(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");
         repository.save(restaurant);
+    }
+
+    @CacheEvict(value = "restaurants", allEntries = true)
+    @Override
+    public void evictCache() {
     }
 
 }

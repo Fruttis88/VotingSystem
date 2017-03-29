@@ -1,5 +1,6 @@
 package ru.grad.web;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -27,6 +28,11 @@ public class RestaurantControllerTest extends AbstractControllerTest {
 
     @Autowired
     private RestaurantService service;
+
+    @Before
+    public void setUp() throws Exception {
+        service.evictCache();
+    }
 
     @Test
     public void testGet() throws Exception {

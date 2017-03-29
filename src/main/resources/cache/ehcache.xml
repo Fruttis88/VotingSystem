@@ -15,7 +15,7 @@
             diskExpiryThreadIntervalSeconds="120"
             memoryStoreEvictionPolicy="LRU"/>
 
-    <cache name="users"
+    <cache name="restaurants"
            timeToLiveSeconds="60"
            maxElementsInMemory="1000"
            eternal="false"
@@ -25,7 +25,7 @@
            diskExpiryThreadIntervalSeconds="1"
            memoryStoreEvictionPolicy="LRU"/>
 
-    <cache name="ru.grad.model.User"
+    <cache name="ru.grad.model.Restaurant"
            maxElementsInMemory="25000"/>
 
 </ehcache>
