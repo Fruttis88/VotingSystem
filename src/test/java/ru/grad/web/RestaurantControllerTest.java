@@ -55,7 +55,7 @@ public class RestaurantControllerTest extends AbstractControllerTest {
     @Transactional
     @Test
     public void testCreate() throws Exception {
-        Restaurant expected = new Restaurant(null, "newRes", 0);
+        Restaurant expected = new Restaurant(null, "newRes");
         ResultActions action = mockMvc.perform(post(URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
@@ -71,7 +71,7 @@ public class RestaurantControllerTest extends AbstractControllerTest {
 
     @Test
     public void testCreateInvalid() throws Exception {
-        Restaurant expected = new Restaurant(null, " ", null);
+        Restaurant expected = new Restaurant(null, " ");
         mockMvc.perform(post(URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
@@ -82,7 +82,7 @@ public class RestaurantControllerTest extends AbstractControllerTest {
 
     @Test
     public void testCreateDuplicate() throws Exception {
-        Restaurant expected = new Restaurant(null, "На парах", 0);
+        Restaurant expected = new Restaurant(null, "На парах");
         mockMvc.perform(post(URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
@@ -107,7 +107,6 @@ public class RestaurantControllerTest extends AbstractControllerTest {
     public void testUpdateInvalid() throws Exception {
         Restaurant updated = new Restaurant(RES1);
         updated.setName(" ");
-        updated.setVotescount(null);
         mockMvc.perform(put(URL + RES1_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))

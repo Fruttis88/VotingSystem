@@ -19,10 +19,6 @@ public class Restaurant extends BaseEntity {
     @SafeHtml
     private String name;
 
-    @Column(name = "votescount", nullable = false)
-    @NotNull
-    private Integer votescount;
-
     @JsonIgnore
     @OneToMany(mappedBy = "restaurant")
     protected List<Vote> votes;
@@ -36,13 +32,12 @@ public class Restaurant extends BaseEntity {
     }
 
     public Restaurant(Restaurant r) {
-        this(r.getId(), r.getName(), r.getVotescount());
+        this(r.getId(), r.getName());
     }
 
-    public Restaurant(Integer id, String name, Integer votescount) {
+    public Restaurant(Integer id, String name) {
         super(id);
         this.name = name;
-        this.votescount = votescount;
     }
 
     public String getName() {
@@ -51,14 +46,6 @@ public class Restaurant extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getVotescount() {
-        return votescount;
-    }
-
-    public void setVotescount(Integer votescount) {
-        this.votescount = votescount;
     }
 
     public List<Vote> getVotes() {
@@ -78,7 +65,6 @@ public class Restaurant extends BaseEntity {
         return "Restaurant{" +
                 "id=" + getId() +
                 ", name=" + name +
-                ", votescount=" + votescount +
                 '}';
     }
 }

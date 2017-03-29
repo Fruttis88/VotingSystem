@@ -1,10 +1,7 @@
 package ru.grad;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import ru.grad.matcher.ModelMatcher;
 import ru.grad.model.Dish;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,7 +9,6 @@ import static ru.grad.model.BaseEntity.START_SEQ;
 
 
 public class DishTestData {
-    private static final Logger LOG = LoggerFactory.getLogger(DishTestData.class);
     public static final ModelMatcher<Dish> MATCHER = ModelMatcher.of(Dish.class);
 
     public static final int DISH_RES1_ID = START_SEQ + 6;

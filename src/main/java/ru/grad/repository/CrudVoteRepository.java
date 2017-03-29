@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.grad.model.Vote;
+import ru.grad.model.VoteResult;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,16 +18,13 @@ public interface CrudVoteRepository extends CrudRepository<Vote, Integer> {
     @Transactional
     Vote save(Vote vote);
 
-    @Query("SELECT v FROM Vote v")
-    List<Vote> getAll();
+    @Query("SELECT new ru.grad.model.VoteResult(v.restaurant.name, count(v.id), v.voteDate) FROM Vote v WHERE v.restaurant.id=:restaurantId GROUP BY v.restaurant.id, v.restaurant.name, v.voteDate")
+    List<VoteResult> getAll(@Param("restaurantId") int restaurantId);
 
-    @Transactional
-    @Modifying
-    @Query("DELETE FROM Vote v WHERE v.id=:id AND v.restaurant.id=:restaurantId AND v.user.id=:userId")
-    int delete(@Param("id") int id, @Param("restaurantId")int restaurantId, @Param("userId") int userId);
-
-
-    @Query("SELECT v FROM Vote v WHERE v.user.id=:userId AND v.votedate=:date")
+    @Query("SELECT v FROM Vote v WHERE v.user.id=:userId AND v.voteDate=:date")
     Vote getUserVotesToday(@Param("userId") int userId, @Param("date")LocalDate date);
+
+    @Override
+    List<Vote> findAll();
 
 }

@@ -24,12 +24,6 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Restaurant countVotes(Restaurant restaurant) {
-        restaurant.setVotescount(restaurant.getVotescount() + 1);
-        return repository.save(restaurant);
-    }
-
-    @Override
     public Restaurant get(int id) throws NotFoundException {
         return checkNotFoundWithId(repository.findOne(id), id);
     }

@@ -22,10 +22,10 @@ INSERT INTO user_roles (role, user_id) VALUES
   ('ROLE_USER', 2),
   ('ROLE_USER', 3);
 
-INSERT INTO restaurants (name, votescount) VALUES
-  ('Жрем днем', 0),
-  ('Хочу харчо', 1),
-  ('На парах', 0);
+INSERT INTO restaurants (name) VALUES
+  ('Жрем днем'),
+  ('Хочу харчо'),
+  ('На парах');
 
 INSERT INTO dishes (name, price, restaurant_id) VALUES
   ('Шашлык', 500, 4),
@@ -36,4 +36,5 @@ INSERT INTO dishes (name, price, restaurant_id) VALUES
   ('Гальваническая развязка из желе', 12000, 6);
 
 INSERT INTO votes (user_id, restaurant_id) VALUES
-  (3, 5);
+  (3, 5),
+  (2, 5);

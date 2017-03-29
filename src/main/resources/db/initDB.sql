@@ -12,8 +12,7 @@ CREATE SEQUENCE global_seq START 1;
 CREATE TABLE restaurants
 (
   id         INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-  name       VARCHAR NOT NULL,
-  votescount INTEGER NOT NULL
+  name       VARCHAR NOT NULL
 );
 CREATE UNIQUE INDEX restaurants_unique_name_idx
   ON restaurants (name);

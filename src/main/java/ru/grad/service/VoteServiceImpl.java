@@ -2,8 +2,8 @@ package ru.grad.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.grad.model.Restaurant;
 import ru.grad.model.Vote;
+import ru.grad.model.VoteResult;
 import ru.grad.repository.CrudRestaurantRepository;
 import ru.grad.repository.CrudUserRepository;
 import ru.grad.repository.CrudVoteRepository;
@@ -19,14 +19,12 @@ public class VoteServiceImpl implements VoteService {
     private final CrudVoteRepository repository;
     private final CrudRestaurantRepository restaurantRepository;
     private final CrudUserRepository userRepository;
-    private final RestaurantService restaurantService;
 
     @Autowired
-    public VoteServiceImpl(CrudRestaurantRepository restaurantRepository, CrudVoteRepository repository, CrudUserRepository userRepository, RestaurantService restaurantService) {
+    public VoteServiceImpl(CrudRestaurantRepository restaurantRepository, CrudVoteRepository repository, CrudUserRepository userRepository) {
         this.restaurantRepository = restaurantRepository;
         this.repository = repository;
         this.userRepository = userRepository;
-        this.restaurantService = restaurantService;
     }
 
     @Override
@@ -41,17 +39,20 @@ public class VoteServiceImpl implements VoteService {
         } else {
             voteToday = new Vote();
         }
-        Restaurant r = restaurantRepository.findOne(restaurantId);
-        voteToday.setRestaurant(r);
+        voteToday.setRestaurant(restaurantRepository.getOne(restaurantId));
         voteToday.setUser(userRepository.getOne(userId));
         repository.save(voteToday);
-        restaurantService.countVotes(r);
         return voteToday;
+    }
+
+    @Override
+    public List<VoteResult> getAll(int restaurantId) {
+        return repository.getAll(restaurantId);
     }
 
 //    using only for testing
     @Override
     public List<Vote> getAll() {
-        return repository.getAll();
+        return repository.findAll();
     }
 }

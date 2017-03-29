@@ -33,9 +33,9 @@ For windows use Git Bash
 
 ##### By Admin
 
-    create        curl -s -X POST -H "Content-Type: application/json" -d '{"name":"new res", "votescount":0}' http://localhost:8080/grad/api/v1/restaurants  --user admin@gmail.com:admin
-    update        curl -s -X PUT -H "Content-Type: application/json" -d '{"id":4, "name":"update res", "votescount": "0"}' http://localhost:8080/grad/api/v1/restaurants/4  --user admin@gmail.com:admin
-    delete        curl -s -X DELETE http://localhost:8080/grad/api/v1/restaurants/4  --user admin@gmail.com:admin
+    create        curl -s -X POST -H "Content-Type: application/json" -d '{"name":"new res", "votescount":0}' http://localhost:8080/grad/api/v1/restaurants --user admin@gmail.com:admin
+    update        curl -s -X PUT -H "Content-Type: application/json" -d '{"id":4, "name":"update res", "votescount": "0"}' http://localhost:8080/grad/api/v1/restaurants/4 --user admin@gmail.com:admin
+    delete        curl -s -X DELETE http://localhost:8080/grad/api/v1/restaurants/4 --user admin@gmail.com:admin
 
 ##### Any User
 
@@ -48,12 +48,12 @@ For windows use Git Bash
 
 ##### By Admin
 
-    get          curl -s http://localhost:8080/grad/api/v1/restaurants/4/dishes/7  --user admin@gmail.com:admin
+    get          curl -s http://localhost:8080/grad/api/v1/restaurants/4/dishes/7 --user admin@gmail.com:admin
     get all      curl -s http://localhost:8080/grad/api/v1/restaurants/4/dishes/all --user admin@gmail.com:admin
-    create       curl -s -X POST -H "Content-Type: application/json" -d '{"name":"new dish", "price": "300"}' http://localhost:8080/grad/api/v1/restaurants/4/dishes  --user admin@gmail.com:admin
-    update       curl -s -X POST -H "Content-Type: application/json" -d '{"id":7, "name":"update dish", "price": "300"}' http://localhost:8080/grad/api/v1/restaurants/4/dishes/7  --user admin@gmail.com:admin
-    delete       curl -s -X DELETE http://localhost:8080/grad/api/v1/restaurants/4/dishes/7  --user admin@gmail.com:admin
-    delete menu  curl -s -X DELETE http://localhost:8080/grad/api/v1/restaurants/4/dishes  --user admin@gmail.com:admin
+    create       curl -s -X POST -H "Content-Type: application/json" -d '{"name":"new dish", "price": "300"}' http://localhost:8080/grad/api/v1/restaurants/4/dishes --user admin@gmail.com:admin
+    update       curl -s -X POST -H "Content-Type: application/json" -d '{"id":7, "name":"update dish", "price": "300"}' http://localhost:8080/grad/api/v1/restaurants/4/dishes/7 --user admin@gmail.com:admin
+    delete       curl -s -X DELETE http://localhost:8080/grad/api/v1/restaurants/4/dishes/7 --user admin@gmail.com:admin
+    delete menu  curl -s -X DELETE http://localhost:8080/grad/api/v1/restaurants/4/dishes --user admin@gmail.com:admin
 
 ##### Any User
 
@@ -66,3 +66,4 @@ For windows use Git Bash
 ##### Any User
 
     create      curl -s -X POST http://localhost:8080/grad/api/v1/restaurants/4/votes --user user@yandex.ru:password
+    get result  curl -s http://localhost:8080/grad/api/v1/restaurants/5/votes --user user@yandex.ru:password

@@ -20,7 +20,7 @@ public class Vote extends BaseEntity {
     private Restaurant restaurant;
 
     @Column(name = "votedate", columnDefinition = "date default now()")
-    private LocalDate votedate = LocalDate.now();
+    private LocalDate voteDate = LocalDate.now();
 
     public Vote() {
     }
@@ -49,7 +49,7 @@ public class Vote extends BaseEntity {
     public String toString() {
         return "Vote{" +
                 "id=" + id +
-                ", date=" + votedate +
+                ", date=" + voteDate +
                 '}';
     }
 }

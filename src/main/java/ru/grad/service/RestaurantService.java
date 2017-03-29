@@ -9,8 +9,6 @@ public interface RestaurantService {
 
     Restaurant save(Restaurant restaurant);
 
-    Restaurant countVotes(Restaurant restaurant);
-
     Restaurant get(int id) throws NotFoundException;
 
     List<Restaurant> getAll();
