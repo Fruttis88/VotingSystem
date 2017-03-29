@@ -19,7 +19,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static ru.grad.RestaurantTestData.*;
 import static ru.grad.TestUtil.userHttpBasic;
 import static ru.grad.UserTestData.ADMIN;
-import static ru.grad.UserTestData.USER;
 
 
 public class RestaurantControllerTest extends AbstractControllerTest {
