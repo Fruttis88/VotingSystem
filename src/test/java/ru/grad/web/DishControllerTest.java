@@ -41,6 +41,16 @@ public class DishControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    public void testGetAll() throws Exception{
+        mockMvc.perform(get(URL + RES1_ID + "/dishes/all")
+                .with(userHttpBasic(ADMIN)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(MATCHER.contentListMatcher(DISH2, DISH1));
+    }
+
+    @Test
     public void testGetMenu() throws Exception{
         mockMvc.perform(get(URL + RES1_ID + "/dishes")
                 .with(userHttpBasic(ADMIN)))

@@ -49,6 +49,7 @@ For windows use Git Bash
 ##### By Admin
 
     get          curl -s http://localhost:8080/grad/api/v1/restaurants/4/dishes/7  --user admin@gmail.com:admin
+    get all      curl -s http://localhost:8080/grad/api/v1/restaurants/4/dishes/all --user admin@gmail.com:admin
     create       curl -s -X POST -H "Content-Type: application/json" -d '{"name":"new dish", "price": "300"}' http://localhost:8080/grad/api/v1/restaurants/4/dishes  --user admin@gmail.com:admin
     update       curl -s -X POST -H "Content-Type: application/json" -d '{"id":7, "name":"update dish", "price": "300"}' http://localhost:8080/grad/api/v1/restaurants/4/dishes/7  --user admin@gmail.com:admin
     delete       curl -s -X DELETE http://localhost:8080/grad/api/v1/restaurants/4/dishes/7  --user admin@gmail.com:admin

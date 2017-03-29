@@ -19,7 +19,7 @@ public class Vote extends BaseEntity {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
 
-    @Column(name = "votedate", columnDefinition = "timestamp default now()")
+    @Column(name = "votedate", columnDefinition = "date default now()")
     private LocalDate votedate = LocalDate.now();
 
     public Vote() {

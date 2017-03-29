@@ -8,6 +8,7 @@ import ru.grad.repository.DishRepository;
 
 import ru.grad.util.exception.NotFoundException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static ru.grad.util.ValidationUtil.checkNotFoundWithId;
@@ -34,6 +35,12 @@ public class DishServiceImpl implements DishService {
     @Override
     public List<Dish> getAll(int restaurantId) {
         return repository.getAll(restaurantId);
+    }
+
+    @Override
+    public List<Dish> getMenu(int restaurantId) {
+        LocalDate date = LocalDate.now();
+        return repository.getMenu(restaurantId, date);
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.grad.model.Dish;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Transactional(readOnly = true)
@@ -17,6 +18,9 @@ public interface CrudDishRepository extends CrudRepository<Dish, Integer> {
 
     @Query("SELECT d FROM Dish d WHERE d.restaurant.id=:restaurantId ORDER BY d.name")
     List<Dish> getAll(@Param("restaurantId") int restaurantId);
+
+    @Query("SELECT d FROM Dish d WHERE d.restaurant.id=:restaurantId AND d.menudate=:menudate ORDER BY d.name")
+    List<Dish> getAll(@Param("restaurantId") int restaurantId, @Param("menudate")LocalDate date);
 
     @Transactional
     @Modifying

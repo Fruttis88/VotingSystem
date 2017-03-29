@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.grad.model.Dish;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -40,6 +41,11 @@ public class DishRepositoryImpl implements DishRepository {
     @Override
     public List<Dish> getAll(int restaurantId) {
         return crudDishRepository.getAll(restaurantId);
+    }
+
+    @Override
+    public List<Dish> getMenu(int restaurantId, LocalDate date) {
+        return crudDishRepository.getAll(restaurantId, date);
     }
 
     @Override

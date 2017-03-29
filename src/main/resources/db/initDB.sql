@@ -23,6 +23,7 @@ CREATE TABLE dishes (
   restaurant_id INTEGER NOT NULL,
   name          VARCHAR NOT NULL,
   price         INT     NOT NULL,
+  menudate      DATE                DEFAULT now(),
   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
 );
 
@@ -51,7 +52,7 @@ CREATE TABLE votes (
   id            INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   restaurant_id INTEGER NOT NULL,
   user_id       INTEGER NOT NULL,
-  votedate      DATE           DEFAULT now(),
+  votedate      DATE                DEFAULT now(),
   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );

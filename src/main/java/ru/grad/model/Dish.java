@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "dishes")
@@ -22,6 +23,9 @@ public class Dish extends BaseEntity {
     @NotNull
     @Min(0)
     private Integer price;
+
+    @Column(name = "menudate", columnDefinition = "date default now()")
+    private LocalDate menudate = LocalDate.now();
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -76,6 +80,7 @@ public class Dish extends BaseEntity {
                 "id=" + getId() +
                 ", name='" + name + '\'' +
                 ", price=" + price +
+                ", menudate=" + menudate +
                 '}';
     }
 }

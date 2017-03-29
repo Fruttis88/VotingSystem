@@ -2,6 +2,7 @@ package ru.grad.repository;
 
 import ru.grad.model.Dish;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface DishRepository {
@@ -12,6 +13,8 @@ public interface DishRepository {
     Dish get(int id, int restaurantId);
 
     List<Dish> getAll(int restaurantId);
+
+    List<Dish> getMenu(int restaurantId, LocalDate date);
 
     public int deleteRestaurantMenu(int restaurantId);
 

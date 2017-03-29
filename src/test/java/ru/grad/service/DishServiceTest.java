@@ -48,6 +48,11 @@ public class DishServiceTest extends AbstractServiceTest {
     public void testGetAll() throws Exception {
         MATCHER.assertCollectionEquals(DISHES_RES2, service.getAll(RES2_ID));
     }
+
+    @Test
+    public void testGetMenu() throws Exception {
+        MATCHER.assertCollectionEquals(DISHES_RES2, service.getMenu(RES2_ID));
+    }
     @Test
     public void testUpdate() throws Exception {
         Dish updated = getUpdated();

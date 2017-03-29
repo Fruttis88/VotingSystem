@@ -38,10 +38,16 @@ public class DishController {
         LOG.info("get dish {} for Restaurant {}", id, restaurantId);
         return service.get(id, restaurantId);
     }
+
+    @GetMapping(value = "/{restaurantId}/dishes/all")
+    public List<Dish> getAll(@PathVariable("restaurantId") int restaurantId) {
+        LOG.info("getAllDishes for Restaurant {}", restaurantId);
+        return service.getAll(restaurantId);}
+
     @GetMapping(value = "/{restaurantId}/dishes")
     public List<Dish> getMenu(@PathVariable("restaurantId") int restaurantId) {
         LOG.info("getMenu for Restaurant {}", restaurantId);
-        return service.getAll(restaurantId);
+        return service.getMenu(restaurantId);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
