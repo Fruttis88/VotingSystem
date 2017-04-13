@@ -1,7 +1,7 @@
 Vouting Project 
 ==============================
 
-JSON API using Hibernate/Spring/Spring-MVC without frontend
+JSON API using Hibernate/Spring/Spring-MVC/Spring-security without frontend
 
 ## Curl commands
 
