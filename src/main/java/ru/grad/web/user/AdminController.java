@@ -61,4 +61,9 @@ public class AdminController extends AbstractUserController {
     public User getByMail(@RequestParam("email") String email) {
         return super.getByMail(email);
     }
+
+    @PatchMapping("/{id}")
+    public void enable(@PathVariable("id") int id, @RequestParam("enabled") boolean enabled) {
+        super.enable(id, enabled);
+    }
 }

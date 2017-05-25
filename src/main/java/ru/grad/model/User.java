@@ -28,7 +28,7 @@ public class User extends BaseEntity {
 
     @Column(name = "password", nullable = false)
     @NotBlank
-    @Length(min = 5)
+    @Length(min = 5, max = 70)
 //    @JsonView(View.REST.class)
     @SafeHtml
     private String password;

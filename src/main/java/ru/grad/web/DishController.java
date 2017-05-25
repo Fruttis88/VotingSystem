@@ -39,6 +39,7 @@ public class DishController {
         return service.get(id, restaurantId);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/{restaurantId}/dishes/all")
     public List<Dish> getAll(@PathVariable("restaurantId") int restaurantId) {
         LOG.info("getAllDishes for Restaurant {}", restaurantId);
